@@ -1,0 +1,12 @@
+I = imread('H:\Tugas Akhir\images\car.png');
+J = imresize(I, 1);
+K = rgb2gray(RGB);
+imwrite(K,'H:\Tugas Akhir\images\car_gray.png');
+
+img = imread('H:\Tugas Akhir\images\car.png');
+[featureVector,hogVisualization] = extractHOGFeatures(img);
+[hog1,visualization] = extractHOGFeatures(img,'CellSize',[32 32]);
+figure;
+imshow(img); 
+hold on;
+plot(hogVisualization);

@@ -1,0 +1,115 @@
+%-----------------------------------------------------------------------------%
+\chapter{PENDAHULUAN}
+%-----------------------------------------------------------------------------%
+
+\vspace{4.5pt}
+
+\section{Latar Belakang} \label{sec:latar_belakang}
+
+Kemajuan teknologi di bidang transportasi membantu manusia dalam berpindah tempat antar lokasi dalam waktu singkat. Kemajuan teknologi ini dapat dilihat pada teknologi yang digunakan pada kendaraan bermotor seperti penggunaan sistem kemudi otomatis atau \textit{self driving}. Pentingnya sistem kemudi otomatis adalah untuk membantu manusia meringkankan pekerjaan dalam mengemudi dan menurunkan potensi kecelakaan akibat kelelahan dalam menyetir \cite{bougharriou}. Sistem kemudi otomatis membutuhkan deteksi objek. Salah satu objek yang perlu di deteksi adalah mobil. Proses deteksi mobil diawali dengan pengambilan citra dari \textit{dashboard} mobil, kemudian citra diproses untuk setiap \textit{frame}. Dari setiap frame yang diperoleh kemudian diolah untuk mendeteksi posisi mobil, sehingga kecelakaan dapat dihindari.
+ 
+Proses deteksi mobil meliputi tahap \textit{preprocessing}, ekstraksi fitur, tahap klasifikasi. Tahap \textit{preprocessing} berfungsi untuk mendeteksi \textit{Region of Interest} (ROI), yaitu daerah dimana proses deteksi dilakukan dan juga untuk menentukan arah darimana citra diambil. Tahap ekstraksi fitur berfungsi untuk mengambil ciri dari citra untuk digunakan dalam membedakan objek. Tahap morfologi berfungsi untuk mengurangi jumlah objek dengan menghilangkan objek yang tidak sesuai kategori. Sedangkan tahap klasifikasi menentukan dan mengelompokkan objek yang serupa. Mobil yang telah dideteksi dihitung dan ditandai.
+
+\textit{Preprocessing} yang dilakukan yaitu \textit{grayscalling} dan menentukan ROI untuk memperkecil penggunaan memori \cite{prahara}. ROI yang dimaksud berupa jalan dimana mobil akan melaju. ROI yang digunakan, dibuat secara manual berupa citra biner berdasarkan data latih yang digunakan.
+
+Banyak penelitian telah meneliti metode yang akan digunakan untuk deteksi mobil, diantaranya adalah Haar-like, LBP, dan HOG. Metode ini merupakan \textit{Feature Based Methods} yang direpresentasikan dengan baik untuk ekstraksi fitur. Berdasarkan penelitian yang dilakukan oleh \cite{neumann}, pendekatan berbasis fitur HOG mencapai hasil terbaik sehingga akan digunakan pada penelitian ini. Dengan fitur LBP, ditemukan banyak \textit{false positives} yang terdeteksi. Fitur seperti Haar berkinerja terburuk, yang mungkin disebabkan oleh keragaman model sehingga mencegah kecocokan yang baik untuk area pola yang jernih dan berbayang \cite{neumann}.
+
+SVM (\textit{Support Vector Machine}), kNN (\textit{k nearest neighborhood}), dan RF (\textit{Random Forest}) merupakan metode klasifikasi yang populer. Ketiga metode ini menghasilkan hasil yang baik, tetapi performa kNN menurun ketika ruang fitur tidak stabil dan RF tidak bekerja baik pada ruang vektor yang rumit. SVM terbukti dapat menangani masalah klasifikasi dengan efisien \cite{sajib}. Dikarenakan metode SVM memiliki efisiensi yang cukup baik dan cocok dengan metode HOG dengan akurasi sebesar 83\% \cite{shakin}, maka ditentukan \textit{classifier} untuk penelitian ini menggunakan metode SVM.
+
+Pada penelitian ini, \textit{dataset} yang digunakan adalah citra mobil. Dataset yang digunakan terdiri dari 3 jenis data latih yang diambil dari sumber yang berbeda. Penelitian ini menggunakan \textit{dataset UIUC Car Image Database}, \textit{GTI Database}, dan \textit{KITTI Database}. Arah pengambilan kamera untuk \textit{dataset} dilakukan dari posisi \textit{horizontal}. Untuk data latih dibagi menjadi 2 jenis yaitu mobil (kondisi utuh, tidak ada bagian mobil yang terpotong) dan bukan mobil (jalanan, motor, rumah, pejalan kaki, dan sebagainya). Kemudian untuk proses pengujian akan dilakukan analisis untuk kasus kondisi mobil dimana fitur yang terdapat pada citra uji tidak utuh. Pada dataset juga terdapat \textit{template} untuk \textit{Region of Interest} dimana berupa citra biner yang berfungsi untuk menandai lokasi dimana mobil akan melaju yang kemudian dimanfaatkan untuk daerah deteksi mobil.
+\\
+
+\section{Rumusan Masalah}
+Berdasarkan latar belakang yang telah diuraikan di atas, terdapat beberapa permasalah yang dapat dirumuskan sebagai berikut:
+\begin{enumerate}[nolistsep,leftmargin=0.5cm]
+	\item 
+	Bagaimana menentukan \textit{Region of Interest} yang tepat berdasarkan posisi kamera CCTV?
+	\item 
+	Berapa nilai akurasi pada hasil ekstraksi fitur dengan menggunakan metode \textit{Histogram of Oriented Gradients} dan klasifikasi menggunakan metode \textit{Support Vector Machine} untuk deteksi mobil?
+	\\
+\end{enumerate}
+
+\section{Tujuan Penelitian}
+
+Berdasarkan rumusan masalah di atas, maka dapat dideskripsikan tujuan dari penelitian ini, yaitu:
+\begin{enumerate}[nolistsep,leftmargin=0.5cm]
+	\item 
+	Menentukan \textit{Region of Interest} yang sesuai terhadap posisi kamera CCTV.
+	\item 
+	Melakukan penerapan metode \textit{Histogram of Oriented Gradients} dan \textit{Support Vector Machine} pada sistem deteksi mobil.
+	\item
+	Menghitung nilai akurasi deteksi mobil dengan menggunakan metode \textit{Confusion Matrix}.
+	\\
+\end{enumerate}
+
+\section{Batasan Masalah}
+
+Agar penelitian ini lebih fokus dan terarah, maka penulis akan memberikan beberapa batasan masalah sebagai berikut:
+\begin{enumerate}[nolistsep,leftmargin=0.5cm]
+	\item 
+	\textit{Region of Interest} (ROI) yang digunakan adalah jalan raya dimana mobil melaju berdasarkan posisi kamera CCTV di \textit{dashboard} mobil.
+	\item
+	Dataset yang digunakan adalah citra mobil, merupakan citra \textit{grayscale} dengan ekstensi PGM berukuran 64 x 64 piksel dengan \textit{depth bit} 8. 
+	\item
+	Posisi pengambilan citra hanya dilakukan dari belakang mobil saja, yang terdiri dari 4 bagian yaitu jauh, dekat, kiri, dan kanan.
+	\\
+\end{enumerate}
+
+\section{Kontribusi Penelitian}
+Menerapkan metode \textit{Histogram of Oriented Gradients} untuk melakukan ekstraksi fitur pada citra dan \textit{Support Vector Machine} untuk melakukan klasifikasi objek.\\
+
+\section{Metodologi Penelitian}
+
+Berikut ini merupakan metodologi penelitian yang dilakukan dalam penelitian ini: 
+\begin{enumerate}[nolistsep,leftmargin=0.5cm]
+%	\item 
+%	Tinjauan Pustaka \\
+%	Mengumpulkan data dan informasi dengan menggunakan referensi pustaka yang berasal dari berbagai media dan sumber (artikel, buku, literatur, jurnal, tugas akhir, dan \textit{thesis}) yang berhubungan dengan penelitian yang dilakukan dan metode yang digunakan.
+	
+	\item
+	Pengumpulan Data \\
+	Data latih yang digunakan berupa citra digital yang diambil dari \textit{http://cogcomp.org/Data/Car/, http://www.gti.ssr.upm.es/data/Vehicle\_database.html, dan http://www.cvlibs.net/datasets/kitti/} dan data uji berupa citra video dari \textit{http://www.youtube.com.}
+	
+	\item
+	Analisis dan Perancangan \\
+	Menganalisis dan merancang sistem yang akan dibuat berdasarkan \textit{dataset} yang sudah diperoleh sebelumnya.
+	
+	\item
+	Implementasi \\
+	Mengimplementasikan hasil perancangan yang telah dibuat sebelumnya dalam bentuk aplikasi untuk melakukan ekstraksi fitur.
+	
+	\item
+	Pengujian \\
+	Melakukan pengujian terhadap aplikasi yang telah dibuat dan menghitung nilai akurasi dari hasil deteksi mobil. Selain itu akan dilakukan pengujian untuk kasis fitur tidak utuh dan analisis setiap \textit{parameter} masukan pada setiap metode untuk mendapatkan nilai dari \textit{parameter} yang sesuai untuk kasus \textit{dataset} mobil.
+	\\
+\end{enumerate}
+
+\section{Sistematika Penulisan}
+
+Laporan penelitian ini disusun berdasarkan sistematika penulisan berikut ini: \\[0.5cm]
+\noindent 
+\textbf{BAB I \hspace{1cm} Pendahuluan}
+\begin{addmargin}[2.35cm]{0em}
+Bab ini menjelaskan tentang latar belakang, rumusan masalah, tujuan penelitian, batasan masalah, metodologi penelitian, dan sistematika penulisan.
+\end{addmargin}
+\noindent 
+\textbf{BAB II \hspace{0.8cm} Landasan Teori}
+\begin{addmargin}[2.35cm]{0em}
+Bab ini menjelaskan teori mengenai tinjauan pustaka, tinjauan studi, dan tinjauan objek.
+\end{addmargin}
+\noindent 
+\textbf{BAB III \hspace{0.7cm} Analisis dan Perancangan}
+\begin{addmargin}[2.35cm]{0em}
+Bab ini menjelaskan analisa terhadap masalah, solusi, dan perancangan sistem.
+\end{addmargin}
+\noindent 
+\textbf{BAB IV \hspace{0.7cm} Implementasi dan Pengujian}
+\begin{addmargin}[2.35cm]{0em}
+Bab ini menjelaskan proses implementasi dan pengujian terhadap aplikasi yang dibuat.
+\end{addmargin}
+\noindent \textbf{BAB V \hspace{0.8cm} Kesimpulan dan Saran}
+\begin{addmargin}[2.35cm]{0em}
+Bab ini menjelaskan kesimpulan dari aplikasi yang telah dibuat dan saran untuk pengembangan aplikasi lain.
+\end{addmargin}
+
+\newpage

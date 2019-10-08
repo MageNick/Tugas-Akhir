@@ -1,0 +1,72 @@
+%-----------------------------------------------------------------------------%
+\chapter{IMPLEMENTASI DAN PENGUJIAN}
+%-----------------------------------------------------------------------------%
+
+%
+\vspace{4.5pt}
+
+\section{Lingkungan Implementasi}
+
+\subsection{Spesifikasi Perangkat Keras}
+
+\subsection{Lingkungan Perangkat Lunak}
+
+\section{Impelementasi Perangkat Lunak}
+
+\subsection{Impelementasi Basis Data}
+\begin{raggedleft} Pada tahap ini akan di bahas mengenai perancangan basis data sistem. Berikut adalah perancangan tabel-tabel yang dibuat dalam proses pembuatan sistem pakar untuk identifikasi kerusakan mesin pada sepeda motor 4T (stroke).\end{raggedleft}
+
+\begin{enumerate}
+\item Tbl\_user\\
+Tbl\_user berfungsi sebagai tabel untuk menyimpan data admin dan {\itshape user}.
+
+\begin{table}[h!]
+\centering
+\caption{Struktur Tabel {\itshape User}}
+ \begin{tabular}{| p{2cm} | p{1.5cm} | p{1cm} | p{6cm}|}
+    \hline
+    {\bfseries Field} & {\centering \bfseries Type} & {\bfseries Size} & {\bfseries Keterangan} \\ \hline
+    Id\_user & Integer & 5 & Id {\itshape user} sebagai {\itshape primary key} \\ \hline
+    Email & Varchar & 30 & {\itshape Email} dari {\itshape user} \\ \hline
+    Username & Varchar & 10 & {\itshape Username} digunakan untuk {\itshape login} \\ \hline
+    Password & Varchar & 255 & {\itshape Password} yang dipakai untuk {\itshape login} \\ \hline
+    Nama & Varchar & 30 & Nama lengkap dari pemilik{\itshape id} \\ \hline
+    Alamat & Varchar & 30 & Alamat dari {\itshape user} \\ \hline
+    Status & Varchar & 10 & Status hak akses ({\itshape admin} atau {\itshape user}) \\ \hline
+    \end{tabular}
+\end{table}
+\item Tbl\_gejala\\
+Tbl\_gejala berfungsi untuk menyimpan data gejala kerusakan sepeda motor.\\
+
+\newpage
+\begin{table}[h!]
+\centering
+\caption{Struktur Tabel Gejala}
+ \begin{tabular}{| p{2cm} | p{1.5cm} | p{1cm} | p{6cm}|}
+    \hline
+    {\bfseries Field} & {\centering \bfseries Type} & {\bfseries Size} & {\bfseries Keterangan} \\ \hline
+    Id\_gejala & Integer & 5 & Id gejala sebagai {\itshape primary key} \\ \hline
+    Nama\_gejala & Text & - & Nama gejala kerusakan \\ \hline
+    Pertanyaan & Text & - & Pertanyaan yang diberikan sistem \\ \hline
+    \end{tabular}
+\end{table}
+\end{enumerate}
+\subsection{Tipe Data Bentukan (\itshape Abstract Data Type)}
+
+\subsection{{\itshape Method} Pemerosesan}
+
+\subsection{Implementasi Metode}
+
+\section{Implementasi Kebutuhan Fungsional}
+
+\subsection{Cara Penggunaan Aplikasi}
+
+\subsubsection{Implementasi Menu}
+
+\section{Pengujian}
+
+\subsection{Data Pengujian}
+
+\subsection{Hasil Pengujian}
+
+\newpage
